@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'module-federation-example-analog-welcome',
+  selector: 'host-analog-welcome',
   standalone: true,
   styles: [
     `

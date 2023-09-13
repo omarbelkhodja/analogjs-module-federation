@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'module-federation-example-root',
+  selector: 'host-root',
   standalone: true,
   imports: [RouterOutlet],
   template: ` <router-outlet></router-outlet> `,

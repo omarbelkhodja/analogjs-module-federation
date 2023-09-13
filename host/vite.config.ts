@@ -18,7 +18,7 @@ export default defineConfig(({ mode, command }) => {
       federation({
         options: {
           workspaceRoot: __dirname,
-          outputPath: 'dist/module-federation-example',
+          outputPath: 'dist/host',
           tsConfig: 'tsconfig.app.json',
           federationConfig: 'federation.config.cjs',
           verbose: false,
