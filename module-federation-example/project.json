@@ -1,0 +1,67 @@
+{
+  "name": "module-federation-example",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "./module-federation-example/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}",
+        "{workspaceRoot}/dist/module-federation-example/.nitro",
+        "{workspaceRoot}/dist/module-federation-example/ssr",
+        "{workspaceRoot}/dist/module-federation-example/analog"
+      ],
+      "options": {
+        "main": "module-federation-example/src/main.ts",
+        "configFile": "module-federation-example/vite.config.ts",
+        "outputPath": "dist/module-federation-example/client"
+      },
+      "defaultConfiguration": "production",
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "sourcemap": false,
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "module-federation-example:build",
+        "port": 4200
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "module-federation-example:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "module-federation-example:build:production"
+        }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "module-federation-example:build"
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{projectRoot}/coverage"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["./module-federation-example/**/*.{ts,html}"]
+      }
+    }
+  },
+  "tags": []
+}
