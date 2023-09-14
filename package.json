@@ -49,6 +49,7 @@
     "@nx/web": "16.8.1",
     "@nx/workspace": "16.8.1",
     "@schematics/angular": "16.2.1",
+    "@softarc/native-federation-esbuild": "^2.0.2",
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",

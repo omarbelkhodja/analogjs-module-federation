@@ -4,7 +4,7 @@ import analog from '@analogjs/platform';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import tsConfigPaths from 'vite-tsconfig-paths';
 import { federation } from '@module-federation/vite';
-import { getBuildAdapter } from "@softarc/native-federation/src/lib/core/build-adapter";
+import { createEsBuildAdapter } from "@softarc/native-federation-esbuild";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
@@ -20,11 +20,11 @@ export default defineConfig(({ mode, command }) => {
           workspaceRoot: __dirname,
           outputPath: 'dist/host',
           tsConfig: 'tsconfig.app.json',
-          federationConfig: 'federation.config.cjs',
+          federationConfig: 'federation.config.js',
           verbose: false,
           dev: command === 'serve',
         },
-        adapter: getBuildAdapter(), // TODO: how to set this parameter ?
+        adapter: createEsBuildAdapter({plugins:[]}), // TODO: how to set this parameter ?
       }),
       analog(),
       tsConfigPaths({
