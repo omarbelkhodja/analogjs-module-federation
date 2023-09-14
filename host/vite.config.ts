@@ -18,7 +18,7 @@ export default defineConfig(({ mode, command }) => {
       federation({
         options: {
           workspaceRoot: __dirname,
-          outputPath: 'dist/host',
+          outputPath: '../dist/host',
           tsConfig: 'tsconfig.app.json',
           federationConfig: 'federation.config.js',
           verbose: false,
@@ -43,6 +43,6 @@ export default defineConfig(({ mode, command }) => {
     },
     define: {
       'import.meta.vitest': mode !== 'production',
-    },
+    }
   };
 });

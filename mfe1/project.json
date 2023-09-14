@@ -17,7 +17,7 @@
         "target": "mfe1:esbuild:development",
         "rebuildDelay": 0,
         "dev": true,
-        "port": 4200
+        "port": 4201
       }
     },    
     "esbuild": {
