@@ -4,13 +4,28 @@ import analog from '@analogjs/platform';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import tsConfigPaths from 'vite-tsconfig-paths';
 import { federation } from '@module-federation/vite';
-import { createEsBuildAdapter } from "@softarc/native-federation-esbuild";
+import * as esbuild from 'esbuild';
+import { createAngularBuildAdapter } from "@angular-architects/native-federation/src/utils/angular-esbuild-adapter";
+import * as path from "path";
+
+export const builderOptions = {
+    optimization: false,
+    sourceMap: true,
+    fileReplacements: [],
+    preserveSymlinks: undefined,
+    stylePreprocessorOption: { includePaths: [] },
+    inlineStyleLanguage: 'css',
+}
+
+const context = {
+    workspaceRoot: path.join(__dirname, '..'),
+    logger: console.log, // TODO
+}
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode, command }) => {
+export default defineConfig(({ mode, command, ssrBuild }) => {
   return {
     publicDir: 'src/public',
-
     build: {
       target: ['es2020'],
     },
@@ -19,12 +34,12 @@ export default defineConfig(({ mode, command }) => {
         options: {
           workspaceRoot: __dirname,
           outputPath: '../dist/host',
-          tsConfig: 'tsconfig.app.json',
-          federationConfig: 'federation.config.js',
-          verbose: false,
+          tsConfig: 'host/tsconfig.app.json',
+          federationConfig: './federation.config.js',
+          verbose: true,
           dev: command === 'serve',
         },
-        adapter: createEsBuildAdapter({plugins:[]}), // TODO: how to set this parameter ?
+        adapter: createAngularBuildAdapter(builderOptions, context),
       }),
       analog(),
       tsConfigPaths({
